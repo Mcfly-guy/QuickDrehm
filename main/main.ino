@@ -20,8 +20,7 @@ Nick Drehm for the creation of DrehmFlight which vastly sped up the creation of 
 
 */
 
-// REQUIRED LIBRARIES (included with download in main sketch folder)
-
+// REQUIRED LIBRARIES (included with download in main  }
 #include <Wire.h>     // I2c communication
 #include <SPI.h>      // SPI communication
 #include <PWMServo.h> // Commanding any extra actuators, installed with teensyduino installer
@@ -318,6 +317,10 @@ void loop() {
     motor_commands, // output motor values
     servo_commands // output servo values
   );
+  servo_commands[SERVO_BACK_RIGHT] = rc_channels[RC_ROLL] * 90.0f;
+  servo_commands[SERVO_BACK_LEFT] = rc_channels[RC_ROLL] * 90.0f;
+  servo_commands[SERVO_FRONT_RIGHT] = rc_channels[RC_ROLL] * 90.0f;
+  servo_commands[SERVO_FRONT_LEFT] = rc_channels[RC_ROLL] * 90.0f;
 
   // Throttle cut check
   bool motor_cut = motorCutStatus(rc_channels[RC_THROTTLE]); // Return if we should turn motors off by default motors are turned off when throttle is low edit this function to your liking
@@ -389,10 +392,10 @@ void controlMixer(float rc_channels[], float pidSums[], float motor_commands[], 
   
   // TODO mix inputs to servo commands
   // servos need to be scaled to work properly with the servo scaling that was set earlier
-  servo_commands[SERVO_0] = 0.0f;
-  servo_commands[SERVO_1] = 0.0f;
-  servo_commands[SERVO_2] = 0.0f;
-  servo_commands[SERVO_3] = 0.0f;
+  servo_commands[SERVO_BACK_RIGHT] = 0.0f;
+  servo_commands[SERVO_BACK_LEFT] = 0.0f;
+  servo_commands[SERVO_FRONT_RIGHT] = 0.0f;
+  servo_commands[SERVO_FRONT_LEFT] = 0.0f;
   servo_commands[SERVO_4] = 0.0f;
   servo_commands[SERVO_5] = 0.0f;
   servo_commands[SERVO_6] = 0.0f;
@@ -464,4 +467,5 @@ bool motorCutStatus(float throttle) {
   } else {
     return false;
   }
+// REQUIRED LIBRARIES (included with download in main  }
 }
