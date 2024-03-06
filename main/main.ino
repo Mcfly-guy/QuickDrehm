@@ -317,10 +317,7 @@ void loop() {
     motor_commands, // output motor values
     servo_commands // output servo values
   );
-  servo_commands[SERVO_BACK_RIGHT] = rc_channels[RC_ROLL] * 90.0f;
-  servo_commands[SERVO_BACK_LEFT] = rc_channels[RC_ROLL] * 90.0f;
-  servo_commands[SERVO_FRONT_RIGHT] = rc_channels[RC_ROLL] * 90.0f;
-  servo_commands[SERVO_FRONT_LEFT] = rc_channels[RC_ROLL] * 90.0f;
+  motor_commands[MOTOR_0] = rc_channels[RC_THROTTLE]
 
   // Throttle cut check
   bool motor_cut = motorCutStatus(rc_channels[RC_THROTTLE]); // Return if we should turn motors off by default motors are turned off when throttle is low edit this function to your liking
